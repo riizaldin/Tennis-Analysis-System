@@ -1,0 +1,14 @@
+ultralytics
+opencv-python
+pandas
+numpy
+torch
+torchvision
+streamlit
+pillow
+pyyaml
+tqdm
+scipy
+matplotlib
+seaborn
+roboflow

@@ -1,0 +1,26 @@
+# BoT-SORT tracker configuration optimized for tennis players
+# Based on BoT-SORT: https://arxiv.org/abs/2206.14651
+
+tracker_type: botsort  # BoT-SORT tracker
+
+# ReID model for appearance feature extraction
+with_reid: True  # Enable ReID for better re-identification
+
+# Tracking parameters
+track_high_thresh: 0.5  # High threshold for track initialization (detection confidence)
+track_low_thresh: 0.1   # Low threshold for track continuation
+new_track_thresh: 0.6   # Threshold for creating new tracks
+track_buffer: 30        # Number of frames to keep lost tracks (1 second at 30fps)
+match_thresh: 0.8       # Matching threshold for association (higher = stricter)
+
+# Motion model parameters
+lambda_: 0.985          # EMA smoothing factor for motion model
+proximity_thresh: 0.5   # Proximity threshold for first matching stage
+appearance_thresh: 0.25 # Appearance threshold for second matching stage
+
+# Kalman Filter settings
+std_weight_position: 1.0 / 20  # Process noise for position
+std_weight_velocity: 1.0 / 160 # Process noise for velocity
+
+# Additional settings
+gmc_method: sparseOptFlow  # Global Motion Compensation method (orb, sift, ecc, or sparseOptFlow)
