@@ -359,15 +359,21 @@ if uploaded_file is not None:
                     
                     # Opponent player speed
                     opponent_player_id = 1 if player_shot_ball == 2 else 2
-                    distance_covered_pixels_opponent = measure_distance(
-                        player_mini_court_detections[start_frame][opponent_player_id],
-                        player_mini_court_detections[end_frame][opponent_player_id]
-                    )
-                    distance_covered_meters_opponent = convert_pixel_distance_to_meters(
-                        distance_covered_pixels_opponent,
-                        constants.DOUBLE_LINE_WIDTH,
-                        mini_court.get_width_of_mini_court()
-                    )
+                    opponent_start = player_mini_court_detections[start_frame].get(opponent_player_id)
+                    opponent_end = player_mini_court_detections[end_frame].get(opponent_player_id)
+                    if opponent_start is not None and opponent_end is not None:
+                        distance_covered_pixels_opponent = measure_distance(
+                            opponent_start,
+                            opponent_end
+                        )
+                        distance_covered_meters_opponent = convert_pixel_distance_to_meters(
+                            distance_covered_pixels_opponent,
+                            constants.DOUBLE_LINE_WIDTH,
+                            mini_court.get_width_of_mini_court()
+                        )
+                        speed_of_opponent_player = distance_covered_meters_opponent / ball_shot_time_in_seconds * 3.6
+                    else:
+                        speed_of_opponent_player = 0
                     
                     speed_of_opponent_player = distance_covered_meters_opponent / ball_shot_time_in_seconds * 3.6
                     
